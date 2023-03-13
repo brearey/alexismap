@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/select.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Карта больниц</title>
 </head>
@@ -11,10 +12,14 @@
 		<div class="header">
 			<h1>Карта больниц</h1>
 		</div>
-		<div class="map">
+		<div id="map" class="map">
 			<!-- Карта Яндекс -->
-			<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A88e69390b4527286ecdc63224d04a6b89977e3287c39847099b938d032e8470b&amp;width=100%25&amp;height=800&amp;lang=ru_RU&amp;scroll=true"></script>
+			<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A88e69390b4527286ecdc63224d04a6b89977e3287c39847099b938d032e8470b&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true",></script>
 		</div>
+		<select onchange="changeCity(this.value);" class="select-css">
+			<option value="0">Якутск</option>
+			<option value="1">Москва</option>
+		</select>
 		<div class="menu">
 			<!-- Меню приложения Алексис -->
 			<img src="img/button1.png">
@@ -29,5 +34,24 @@
 			<p>МБНОУ "Октемский НОЦ им. М.Е. Николаева"</p>
 		</div>
 	</div>
+
+	<script>
+		const city = [
+		"https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A88e69390b4527286ecdc63224d04a6b89977e3287c39847099b938d032e8470b&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true",
+		"https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A43bc787fc4798949caf435e63b233efb2562f0677d83bd4df8495c378a5f2066&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true"
+		];
+
+		function changeCity(cityIndex)
+		{
+			var s = document.createElement("script");
+			s.type = "text/javascript";
+			s.async = true;
+			s.charset = "utf-8";
+			s.src = city[cityIndex];
+			s.innerHTML = null;
+			document.getElementById('map').innerHTML = "";
+			document.getElementById('map').appendChild(s);
+		}
+	</script>
 </body>
 </html>
